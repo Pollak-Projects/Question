@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orarend</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  </head>
+<body>
+
+<div id="kerdesek" class="card">
+
+</div>
+  </table>
+  <script>
+    const kerdesek = [
+    {
+      "question_id": 1,
+      "registration_id": 1,
+      "quiz_id": 1,
+      "question_question": "Melyek az ABC elso betuje",
+      "question_answers": [
+        "A",
+        "C",
+        "K",
+        "X"
+      ],
+      "question_correct_answers": "A",
+  
+      "question_markable_answers": "1",
+      "question_description": "Valaszd ki a helyes megoldast",
+      "question_type": 1
+    },
+    {
+      "question_id": 2,
+      "registration_id": 1,
+      "quiz_id": 1,
+      "question_question": "Ezek kozul melyek szamitogepes perifriak",
+      "question_answers": [
+        "laptop",
+        "telefon tolto",
+        "eger",
+        "billenyuzet"
+      ],
+      "question_correct_answers": [
+        "eger",
+        "billenyuzet"
+      ],
+  
+      "question_markable_answers": "2",
+      "question_description": "Valaszd ki a helyes megoldasokat",
+      "question_type": 2
+    },
+    {
+      "question_id": 3,
+      "registration_id": 1,
+      "quiz_id": 1,
+      "question_question": "Kosd ossze az osszetartozo szavakat",
+      "question_answers": [
+        "kek",
+        "piros",
+        "eger",
+        "billenyuzet"
+      ],
+      "question_correct_answers": [
+        [
+          "kek",
+          "piros"
+        ],
+        [
+          "eger",
+          "billenyuzet"
+        ]
+      ],
+  
+      "question_markable_answers": "0",
+      "question_description": "Valaszd ki a helyes megoldasokat",
+      "question_type": 4
+    }
+  ]
+
+      $(document).ready(function () {
+        console.log(kerdesek)
+        for (let kerdes of kerdesek){
+          console.log(kerdes)
+          if (kerdes.question_type == "1")
+          {
+            let fejlec = document.createElement("h5")
+              fejlec.innerText = kerdes.question_question
+              document.getElementById("kerdesek").appendChild(fejlec)
+
+              let leiras = document.createElement("p")
+              leiras.innerText = kerdes.question_description
+              document.getElementById("kerdesek").appendChild(leiras)
+
+              let valaszokbody = document.createElement("div")
+              valaszokbody.id = kerdes.question_id
+              document.getElementById("kerdesek").appendChild(valaszokbody)
+
+              for (let valasz of kerdes.question_answers)
+              {
+                let valaszbody = document.createElement("div")
+                valaszbody.className = "form-check"
+                document.getElementById(kerdes.question_id).appendChild(valaszbody)
+
+                let radio = document.createElement("input")
+                radio.type = "radio"
+                radio.className = "form-check-input"
+                radio.id = valasz
+                radio.name = kerdes.question_answer
+                valaszbody.appendChild(radio)
+
+                let label = document.createElement("label")
+                label.for = kerdes.question_answer
+                label.innerText = valasz
+                valaszbody.appendChild(label)
+              }
+          }
+          else if(kerdes.question_type == "2")
+          {
+            let fejlec = document.createElement("h5")
+              fejlec.innerText = kerdes.question_question
+              document.getElementById("kerdesek").appendChild(fejlec)
+
+              let leiras = document.createElement("p")
+              leiras.innerText = kerdes.question_description
+              document.getElementById("kerdesek").appendChild(leiras)
+
+              let valaszokbody = document.createElement("div")
+              valaszokbody.id = kerdes.question_id
+              document.getElementById("kerdesek").appendChild(valaszokbody)
+
+              for (let valasz of kerdes.question_answers)
+              {
+                let valaszbody = document.createElement("div")
+                valaszbody.className = "form-check"
+                document.getElementById(kerdes.question_id).appendChild(valaszbody)
+
+                let radio = document.createElement("input")
+                radio.type = "checkbox"
+                radio.className = "form-check-input"
+                radio.id = valasz
+                radio.name = kerdes.question_answer
+                valaszbody.appendChild(radio)
+
+                let label = document.createElement("label")
+                label.for = kerdes.question_answer
+                label.innerText = valasz
+                valaszbody.appendChild(label)
+              }
+          }
+          else if(kerdes.question_type == "4")
+          {
+            console.log("sad")
+            let container = document.createElement("div")
+            container.className = "container text-center"
+            container.id = kerdes.question_id
+
+            let row = document.createElement("div")
+            row.className = "row"
+
+            let balkartya = document.createElement("div")
+            balkartya.className = "col"
+            balkartya.id = kerdes.question_id + "_baloldal"
+
+            let jobbkartya = document.createElement("div")
+            jobbkartya.className = "col"
+            jobbkartya.id = kerdes.question_id + "_jobboldal"
+
+            row.appendChild(balkartya)
+            row.appendChild(jobbkartya)
+
+            container.appendChild(row)
+            document.getElementById("kerdesek").appendChild(container)
+
+            let baloldal = true
+
+            for (let valasz of kerdes.question_answers)
+            {
+              if (baloldal)
+              {
+                baloldal = false
+                let oldal = document.getElementById(kerdes.question_id + "_baloldal")
+                let button = document.createElement("button")
+                button.innerHTML = valasz
+                oldal.appendChild(button)
+              }
+              else
+              {
+                baloldal = true
+                let oldal = document.getElementById(kerdes.question_id + "_jobboldal")
+                let button = document.createElement("button")
+                button.innerHTML = valasz
+                oldal.appendChild(button)
+              }
+            }
+          }
+      }});
+    </script>
+</body>
+</html>
