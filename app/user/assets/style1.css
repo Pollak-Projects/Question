@@ -57,14 +57,6 @@ form .input-box input{
   border-radius: 6px;
   transition: all 0.3s ease;
 }
-.input-box input:focus,
-.input-box input:valid{
-  color: #fff;
-  font-size: 20px;
-  font-weight: 500;
-  padding-left: 0px;
-  border: 1px solid ;
-}
 form .policy{
   display: flex;
   align-items: center;

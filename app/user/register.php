@@ -1,4 +1,6 @@
 <?php
+// debugger ENABLE ONLY IN DEVELOPEMENT
+error_reporting(E_ALL); ini_set('display_errors', '1');
 
 //require_once realpath(__DIR__ . '/vendor/autoload.php');
 
@@ -24,40 +26,58 @@ foreach($fields as $field){
 }
 
 // Checking if the user exists
-$sql = "SELECT count(*) FROM users WHERE user_name = ? AND user_pass = ? AND user_email = ? LIMIT 1";
+$sql = "SELECT count(*) FROM users WHERE user_name = ? AND user_email = ?";
 $stmt = $mysqli->prepare($sql);
 
-$stmt->bind_param("sss", $_POST['username'], $_POST['password'], $_POST['email']);
+$stmt->bind_param("ss", $_POST['username'],  $_POST['email']);
 $stmt->execute();
-var_dump($stmt);
 
-$lines = $stmt->num_rows;
-if($lines >= 1){
+$lines = $stmt->affected_rows;
+echo $lines;
+
+if($lines > 0){
     echo 'User as alias already exists!';
     return http_response_code(409);
-    
 }
+
 else{
     $stmt->close();
     $mysqli->next_result();
-    
-    $sql = "INSERT INTO users (user_name, user_pass, user_email, user_first_name, user_last_name) VALUES (?,?,?,?,?)";
+
+    $sql = "INSERT INTO users (
+        user_id,
+        user_name,
+        user_pass,
+        user_email,
+        user_first_name,
+        user_last_name,
+        user_permission_level
+    ) VALUES (?,?,?,?,?,?,?)";
     $stmt = $mysqli->prepare($sql);
     
-    
-    $stmt->bind_param("sssss", $_POST['username'], $_POST['password'], $_POST['email'], $_POST['firstname'], $_POST['lastname']);
+    require("./assets/uuid.php");
+    $id = gen_uuid();
+    $default = "default";
+    echo $id;
+    $stmt->bind_param("sssssss", 
+    $id,
+    $_POST['username'],
+    $_POST['password'],
+    $_POST['email'],
+    $_POST['firstname'],
+    $_POST['lastname'],
+    $default
+    );
     $stmt->execute();
 
     $lines = $stmt->num_rows;
 
-    var_dump($stmt);
 
     echo $lines;
 
-    if($lines <= 0){
+    if( mysqli_affected_rows($mysqli) <= 0){
         $stmt->close();
         $mysqli->next_result();
-        
         echo 'there was some issue while registering!';
     }
     else{
