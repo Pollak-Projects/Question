@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 19, 2023 at 08:56 AM
+-- Generation Time: Apr 27, 2023 at 06:44 AM
 -- Server version: 8.0.32
 -- PHP Version: 8.1.17
 
@@ -28,9 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `users` (
-  `user_id` int NOT NULL,
-  `group_id` int NOT NULL,
-  `user_registration_id` int NOT NULL,
+  `user_id` varchar(36) NOT NULL,
+  `group_id` int,
   `user_name` text NOT NULL,
   `user_pass` text NOT NULL,
   `user_email` text NOT NULL,
@@ -48,16 +47,6 @@ CREATE TABLE `users` (
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
