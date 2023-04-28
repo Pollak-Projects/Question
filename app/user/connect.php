@@ -1,6 +1,7 @@
 <?php
 $database = 'fosmenta';
-$mysqli = new mysqli("localhost", "tanulo", "tanulo",$database); 
+$mysqli = new mysqli("localhost", "root", "MelegRakGyaszKapn43l!",$database); 
+
 
 if (!$mysqli) {
     die('Unable to coonnect to the MySql server' . $mysqli->connect_errno);
