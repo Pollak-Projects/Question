@@ -1,12 +1,9 @@
 <?php
-require_once(".../global/database_connection/global_connect.php");
-
-$DatabaseConnect = new DatabaseConnect();
-$mysqli = $DatabaseConnect->ConnectToDatabaseTable();
+require_once("../global/database_connection/global_connect.php");
 
 $quizId = $_POST['quizId'];
 
-$sql = "SELECT * FROM `questions` where `quiz_id` = " . $quizId . "";
+$sql = "SELECT * FROM `Questions` where `quiz_id` = " . $quizId . "";
 
 $result = $mysqli->query($sql);
 
