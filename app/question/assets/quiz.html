@@ -160,15 +160,17 @@
                   inputField.appendChild(inputFieldOption)
                 }
 
+                let c = 0
                 for (let valasz of valaszok) {
                   let row = document.createElement("div")
-                  row.appendChild(inputField)
 
                   let jelenlegiValasz = document.createElement("p")
                   jelenlegiValasz.innerText = valasz
+                  jelenlegiValasz.style = "display: inline;"
 
-                  console.log(jelenlegiValasz)
-                  container.appendChild(jelenlegiValasz)
+                  row.appendChild(inputField.cloneNode(true))
+                  row.appendChild(jelenlegiValasz)
+                  container.appendChild(row)
 
                 }
 
