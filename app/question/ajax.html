@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITT AZ AJAX</title>
+</head>
+<body>
+  <script>
+    $.ajax(
+        {
+          url: "http://localhost/bluementa/Question/app/question/questionupload.php",
+          type: 'POST',
+          data: { 
+            registrationId: variable1, 
+            quizId: variable2, 
+            questionQuestion: variable3, 
+            questionAnswers: variable4, 
+            questionMarkableAnswers: variable5, 
+            questionCorrectAnswers: variable6, 
+            questionDescription: variable7, 
+            questionType: variable8  
+          },
+          dataType: 'json',
+          success: function (data, status, xhr) {
+
+          }
+        });
+  </script>
+</body>
+</html>
